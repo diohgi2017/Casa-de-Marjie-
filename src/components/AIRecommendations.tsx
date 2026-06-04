@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useGlowTrack } from '../hooks/useGlowTrack';
 import { Product } from '../services/api';
+import { affiliateLinks } from '../data/affiliateLinks';
 
 interface RecommendedProduct extends Partial<Product> {
   id: string;
@@ -11,11 +12,25 @@ interface RecommendedProduct extends Partial<Product> {
   price: string;
   image: string;
   type: 'Buy Again' | 'AI Recommendation';
+  affiliate_url?: string;
 }
 
 const AIRecommendations: React.FC = () => {
   const userId = 'test-user-1';
   const { products, logs, loading, error } = useGlowTrack(userId);
+
+  const handlePurchase = (rec: RecommendedProduct) => {
+    // Try the product's affiliate_url first, then fall back to name-based lookup
+    let url = rec.affiliate_url;
+    if (!url) {
+      const slug = rec.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const link = affiliateLinks[slug];
+      url = link?.ulta || link?.amazon;
+    }
+    if (url) {
+      window.open(url, '_blank', 'noopener noreferrer');
+    }
+  };
 
   // Mocked AI recommendations based on user data
   const recommendations: RecommendedProduct[] = [
@@ -32,7 +47,7 @@ const AIRecommendations: React.FC = () => {
     {
       id: 'rec-2',
       brand: 'CeraVe',
-      name: 'Hydrating Facial Cleanser',
+      name: 'Foaming Facial Cleanser',
       category: 'Cleanser',
       reason: 'Your current bottle is likely running low based on your usage frequency. Keep your routine consistent!',
       price: '$15.99',
@@ -41,11 +56,11 @@ const AIRecommendations: React.FC = () => {
     },
     {
       id: 'rec-3',
-      brand: 'SkinCeuticals',
-      name: 'C E Ferulic',
+      brand: 'The Ordinary',
+      name: 'Niacinamide 10% + Zinc 1%',
       category: 'Serum',
       reason: 'To level up your "Morning Glow", our AI suggests adding a Vitamin C serum to protect against environmental stressors.',
-      price: '$182.00',
+      price: '$6.50',
       image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=400',
       type: 'AI Recommendation'
     }
@@ -108,7 +123,10 @@ const AIRecommendations: React.FC = () => {
                 "{rec.reason}"
               </p>
               
-              <button className="w-full py-4 bg-emerald-brand text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-lg shadow-emerald-900/10 active:scale-[0.98] transition-all">
+              <button 
+                onClick={() => handlePurchase(rec)}
+                className="w-full py-4 bg-emerald-brand text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-lg shadow-emerald-900/10 active:scale-[0.98] transition-all"
+              >
                 {rec.type === 'Buy Again' ? 'Reorder Now' : 'Purchase via Affiliate'}
               </button>
             </div>

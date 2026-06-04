@@ -144,6 +144,18 @@ const ProductShelf: React.FC = () => {
                   <p className="text-sm text-emerald-brand font-medium">{selectedProduct.status}</p>
                 </div>
               </div>
+              
+              {selectedProduct.affiliate_url && (
+                <a 
+                  href={selectedProduct.affiliate_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 bg-gold-accent text-white rounded-2xl font-bold uppercase tracking-widest text-xs text-center shadow-lg shadow-gold-900/10 active:scale-[0.98] transition-all"
+                >
+                  Buy Now
+                </a>
+              )}
+
               <button 
                 onClick={() => setSelectedProduct(null)}
                 className="w-full py-4 bg-emerald-brand text-white rounded-2xl font-bold uppercase tracking-widest text-xs hover:opacity-90 transition-opacity"
