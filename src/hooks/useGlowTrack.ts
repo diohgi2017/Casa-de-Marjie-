@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { apiService } from '../services/api';
-import type { Product, Routine, Log } from '../services/api';
+import { apiService, Product, Routine, Log, RoutineStep } from '../services/api';
 
 export const useGlowTrack = (userId: string) => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -63,40 +62,42 @@ export const useGlowTrack = (userId: string) => {
     }
   };
 
-  const getRoutineWithSteps = useCallback(async (routineId: string) => {
+  const getRoutineWithSteps = async (routineId: string) => {
     try {
       return await apiService.getRoutineSteps(routineId);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch routine steps');
       return [];
     }
-  }, []);
+  };
 
-  const calculateStreak = useCallback(() => {
+  const calculateStreak = () => {
     if (logs.length === 0) return 0;
-
-    const uniqueDates = Array.from(new Set(logs.map(l => l.date))).sort().reverse();
+    
+    const uniqueDates = Array.from(new Set(logs.map(l => l.date))).sort((a, b) => 
+      new Date(b).getTime() - new Date(a).getTime()
+    );
+    
     const today = new Date().toISOString().split('T')[0];
     const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
-
-    if (uniqueDates[0] !== today && uniqueDates[0] !== yesterday) {
-      return 0;
-    }
-
-    let streak = 1;
-    for (let i = 0; i < uniqueDates.length - 1; i++) {
-      const current = new Date(uniqueDates[i]);
-      const next = new Date(uniqueDates[i + 1]);
-      const diff = (current.getTime() - next.getTime()) / (1000 * 3600 * 24);
-
-      if (diff === 1) {
+    
+    if (uniqueDates[0] !== today && uniqueDates[0] !== yesterday) return 0;
+    
+    let streak = 0;
+    for (let i = 0; i < uniqueDates.length; i++) {
+      const date = new Date(uniqueDates[0]);
+      date.setDate(date.getDate() - i);
+      const expectedDate = date.toISOString().split('T')[0];
+      
+      if (uniqueDates[i] === expectedDate) {
         streak++;
       } else {
         break;
       }
     }
+    
     return streak;
-  }, [logs]);
+  };
 
   return {
     products,

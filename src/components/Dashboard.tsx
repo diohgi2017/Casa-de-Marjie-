@@ -4,10 +4,10 @@ import type { Routine, RoutineStep } from '../services/api';
 import RoutineLogger from './RoutineLogger';
 
 const Dashboard: React.FC = () => {
-  const userId = 'test-user-1'; 
+  const userId = 'test-user-1'; // As mentioned by the engineer
   const { routines, logs, loading, error, addLog, getRoutineWithSteps, calculateStreak } = useGlowTrack(userId);
   const [selectedRoutineSteps, setSelectedRoutineSteps] = useState<Record<string, RoutineStep[]>>({});
-  const [activeRoutine, setActiveRoutine] = useState<Routine | null>(null);
+  const [activeRoutineForLogging, setActiveRoutineForLogging] = useState<Routine | null>(null);
 
   useEffect(() => {
     const fetchSteps = async () => {
@@ -24,7 +24,7 @@ const Dashboard: React.FC = () => {
     }
   }, [routines, getRoutineWithSteps]);
 
-  const streak = calculateStreak(); 
+  const streak = calculateStreak();
 
   if (loading) return <div className="flex items-center justify-center min-h-screen text-emerald-brand font-serif">Loading your glow...</div>;
   if (error) return <div className="p-6 text-red-500">Error: {error}</div>;
@@ -100,8 +100,8 @@ const Dashboard: React.FC = () => {
                 ))}
                 {!isCompleted && steps.length > 0 && (
                   <button 
-                    onClick={() => setActiveRoutine(routine)}
-                    className="w-full py-4 bg-teal-soft text-teal-deep rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-teal-200 transition-all shadow-sm active:scale-[0.98]"
+                    onClick={() => setActiveRoutineForLogging(routine)}
+                    className="w-full py-3 bg-teal-soft text-teal-deep rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-teal-200 transition-colors shadow-sm"
                   >
                     Start Session
                   </button>
@@ -113,38 +113,16 @@ const Dashboard: React.FC = () => {
       </section>
 
       {/* Routine Logger Modal */}
-      {activeRoutine && (
+      {activeRoutineForLogging && (
         <RoutineLogger 
-          routine={activeRoutine}
-          steps={selectedRoutineSteps[activeRoutine.id] || []}
-          onClose={() => setActiveRoutine(null)}
-          onSave={(status, notes, photoUrl) => addLog(activeRoutine.id, status, notes, photoUrl)}
+          routine={activeRoutineForLogging}
+          steps={selectedRoutineSteps[activeRoutineForLogging.id] || []}
+          onClose={() => setActiveRoutineForLogging(null)}
+          onSave={async (status, notes, photoUrl) => {
+            await addLog(activeRoutineForLogging.id, status, notes, photoUrl);
+          }}
         />
       )}
-
-      {/* Bottom Nav Mockup */}
-      <nav className="fixed bottom-6 left-6 right-6 bg-white/80 backdrop-blur-md border border-white/20 px-8 py-4 flex justify-around items-center rounded-3xl shadow-2xl shadow-teal-900/10">
-        <button className="text-emerald-brand">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011-1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-          </svg>
-        </button>
-        <button className="text-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 11-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-        </button>
-        <button className="text-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-          </svg>
-        </button>
-        <button className="text-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-        </button>
-      </nav>
     </div>
   );
 };

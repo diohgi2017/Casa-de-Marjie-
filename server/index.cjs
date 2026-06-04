@@ -8,38 +8,29 @@ const port = 3001;
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} ${req.method} ${req.url}`);
-  next();
-});
-
 let queryQueue = Promise.resolve();
 
 const runQuery = (query) => {
-  return new Promise((resolve, reject) => {
-    queryQueue = queryQueue.then(() => {
-      return new Promise((innerResolve) => {
-        // team-db expects a single quoted SQL statement
-        const command = `team-db "${query.replace(/"/g, '\\"')}"`;
-        exec(command, (error, stdout, stderr) => {
-          if (error) {
-            console.error(`Error executing command: ${command}`);
-            console.error(stderr);
-            reject(error);
-            innerResolve();
-            return;
-          }
-          try {
-            resolve(JSON.parse(stdout));
-          } catch (e) {
-            // If it's not JSON, it might be an empty result or a success message
-            resolve(stdout);
-          }
-          innerResolve();
-        });
-      });
+  const task = () => new Promise((resolve, reject) => {
+    const command = `team-db "${query.replace(/"/g, '\\"')}"`;
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing command: ${command}`);
+        console.error(stderr);
+        reject(error);
+        return;
+      }
+      try {
+        resolve(JSON.parse(stdout));
+      } catch (e) {
+        resolve(stdout);
+      }
     });
   });
+
+  const currentTask = queryQueue.then(task, task);
+  queryQueue = currentTask;
+  return currentTask;
 };
 
 // Users

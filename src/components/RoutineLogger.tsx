@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Routine, RoutineStep } from '../services/api';
+import { Routine, RoutineStep } from '../services/api';
 
 interface RoutineLoggerProps {
   routine: Routine;
@@ -12,7 +12,7 @@ const RoutineLogger: React.FC<RoutineLoggerProps> = ({ routine, steps, onClose, 
   const [completedSteps, setCompletedSteps] = useState<Record<string, boolean>>({});
   const [notes, setNotes] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
-  const [isSaving, setIsSaving] = useState(false);
+  const [isSaving, setIsSaveing] = useState(false);
 
   const toggleStep = (stepId: string) => {
     setCompletedSteps(prev => ({
@@ -22,7 +22,7 @@ const RoutineLogger: React.FC<RoutineLoggerProps> = ({ routine, steps, onClose, 
   };
 
   const handleSave = async () => {
-    setIsSaving(true);
+    setIsSaveing(true);
     try {
       const allDone = steps.every(s => completedSteps[s.id]);
       const status = allDone ? 'completed' : 'partial';
@@ -31,7 +31,7 @@ const RoutineLogger: React.FC<RoutineLoggerProps> = ({ routine, steps, onClose, 
     } catch (err) {
       console.error('Failed to save log', err);
     } finally {
-      setIsSaving(false);
+      setIsSaveing(false);
     }
   };
 
