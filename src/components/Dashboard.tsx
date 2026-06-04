@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
 
   const streak = calculateStreak();
 
-  if (loading) return <div className="flex items-center justify-center min-h-screen text-emerald-brand font-serif">Loading your glow...</div>;
+  if (loading) return <div className="flex items-center justify-center min-h-screen text-emerald-brand font-serif">Preparing your ritual...</div>;
   if (error) return <div className="p-6 text-red-500">Error: {error}</div>;
 
   return (
@@ -35,11 +35,11 @@ const Dashboard: React.FC = () => {
       <header className="p-6 pt-12 flex justify-between items-start">
         <div>
           <h1 className="text-4xl text-emerald-brand font-serif">Good morning,</h1>
-          <p className="text-2xl text-teal-deep font-serif">Glow Getter ✨</p>
+          <p className="text-2xl text-teal-deep font-serif">Marjie Muse ✨</p>
         </div>
         <div className="w-12 h-12 rounded-full border-2 border-emerald-brand/20 p-1">
           <div className="w-full h-full rounded-full bg-teal-soft flex items-center justify-center text-emerald-brand font-bold">
-            G
+            C
           </div>
         </div>
       </header>

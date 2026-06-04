@@ -34,7 +34,7 @@ const PrintableRoutine: React.FC = () => {
           <div className="text-emerald-brand text-sm tracking-[0.4em] uppercase mb-4 font-sans font-light">
             Casa de Marjie
           </div>
-          <h1 className="text-5xl text-teal-deep font-serif italic mb-2">Glow Ritual</h1>
+          <h1 className="text-5xl text-teal-deep font-serif italic mb-2">Ritual Menu</h1>
           <div className="w-12 h-[1px] bg-gold-accent mx-auto mb-4"></div>
           <p className="text-gray-400 font-sans text-xs uppercase tracking-widest">Personalized Skincare Menu</p>
         </header>
@@ -75,7 +75,7 @@ const PrintableRoutine: React.FC = () => {
           <p className="text-[10px] text-gray-400 font-serif italic max-w-xs mx-auto">
             "Beauty begins the moment you decide to be yourself."
           </p>
-          <p className="mt-4 text-[8px] text-gray-300 uppercase tracking-widest">GlowTrack Premium Experience</p>
+          <p className="mt-4 text-[8px] text-gray-300 uppercase tracking-widest">Casa de Marjie Premium Experience</p>
         </footer>
 
         {/* Corner Accents */}

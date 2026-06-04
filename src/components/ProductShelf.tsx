@@ -113,6 +113,12 @@ const ProductShelf: React.FC = () => {
         ))}
       </div>
 
+      <footer className="p-12 text-center">
+        <p className="text-[10px] text-gray-300 font-sans leading-relaxed italic max-w-[240px] mx-auto">
+          Disclaimer: Suggestions are for informational purposes only. Casa de Marjie is not a medical professional. Consult a dermatologist for medical advice.
+        </p>
+      </footer>
+
       {/* Product Detail Overlay */}
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-end justify-center">

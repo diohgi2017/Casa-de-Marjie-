@@ -59,7 +59,7 @@ const AIRecommendations: React.FC = () => {
       brand: 'The Ordinary',
       name: 'Niacinamide 10% + Zinc 1%',
       category: 'Serum',
-      reason: 'To level up your "Morning Glow", our AI suggests adding a Vitamin C serum to protect against environmental stressors.',
+      reason: 'To level up your "Morning Ritual", our AI suggests adding a Vitamin C serum to protect against environmental stressors.',
       price: '$6.50',
       image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=400',
       type: 'AI Recommendation'
@@ -134,10 +134,12 @@ const AIRecommendations: React.FC = () => {
         ))}
       </section>
 
-      {/* Affiliate Disclosure */}
-      <footer className="p-12 text-center">
-        <p className="text-[10px] text-gray-400 font-sans leading-relaxed uppercase tracking-tighter max-w-[200px] mx-auto">
+      <footer className="p-12 text-center space-y-4">
+        <p className="text-[10px] text-gray-400 font-sans leading-relaxed uppercase tracking-tighter max-w-[240px] mx-auto">
           Casa de Marjie may earn a commission from purchases made through these links.
+        </p>
+        <p className="text-[10px] text-gray-300 font-sans leading-relaxed italic max-w-[240px] mx-auto border-t border-gray-100 pt-4">
+          Disclaimer: Suggestions are for informational purposes only. Casa de Marjie is not a medical professional. Consult a dermatologist for medical advice.
         </p>
       </footer>
     </div>
