@@ -2,12 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useCasaDeMarjie } from '../hooks/useCasaDeMarjie';
 import type { Routine, RoutineStep } from '../services/api';
 import RoutineLogger from './RoutineLogger';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Dashboard: React.FC = () => {
-  const userId = 'test-user-1'; // As mentioned by the engineer
+  const userId = 'test-user-1';
   const { routines, logs, loading, error, addLog, getRoutineWithSteps, calculateStreak } = useCasaDeMarjie(userId);
   const [selectedRoutineSteps, setSelectedRoutineSteps] = useState<Record<string, RoutineStep[]>>({});
   const [activeRoutineForLogging, setActiveRoutineForLogging] = useState<Routine | null>(null);
+
+  const museWisdom = [
+    "Your skin is a reflection of your self-care journey.",
+    "Consistency is the secret ingredient to every ritual.",
+    "Breathe. Hydrate. Ritualize.",
+    "The best foundation you can wear is healthy skin.",
+    "Beauty is being comfortable in your own skin."
+  ];
+  
+  const [wisdom, setWisdom] = useState(museWisdom[0]);
+
+  useEffect(() => {
+    setWisdom(museWisdom[Math.floor(Math.random() * museWisdom.length)]);
+  }, []);
 
   useEffect(() => {
     const fetchSteps = async () => {
@@ -26,47 +41,101 @@ const Dashboard: React.FC = () => {
 
   const streak = calculateStreak();
 
-  if (loading) return <div className="flex items-center justify-center min-h-screen text-emerald-brand font-serif">Preparing your ritual...</div>;
+  if (loading) return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-soft-white">
+      <motion.div 
+        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="text-emerald-brand font-serif text-xl"
+      >
+        Preparing your ritual...
+      </motion.div>
+    </div>
+  );
+  
   if (error) return <div className="p-6 text-red-500">Error: {error}</div>;
 
   return (
-    <div className="max-w-md mx-auto min-h-screen bg-soft-white pb-24">
+    <div className="max-w-md mx-auto min-h-screen bg-soft-white pb-32">
       {/* Header */}
-      <header className="p-6 pt-12 flex justify-between items-start">
+      <motion.header 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="p-6 pt-12 flex justify-between items-start"
+      >
         <div>
           <h1 className="text-4xl text-emerald-brand font-serif">Good morning,</h1>
           <p className="text-2xl text-teal-deep font-serif">Marjie Muse ✨</p>
         </div>
-        <div className="w-12 h-12 rounded-full border-2 border-emerald-brand/20 p-1">
+        <motion.div 
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          className="w-12 h-12 rounded-full border-2 border-emerald-brand/20 p-1 cursor-pointer"
+        >
           <div className="w-full h-full rounded-full bg-teal-soft flex items-center justify-center text-emerald-brand font-bold">
             C
           </div>
+        </motion.div>
+      </motion.header>
+
+      {/* Wisdom Card */}
+      <motion.section 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.1 }}
+        className="px-6 mb-6"
+      >
+        <div className="bg-white/50 backdrop-blur-sm border border-emerald-brand/5 p-4 rounded-3xl italic text-teal-deep/70 text-sm text-center">
+          "{wisdom}"
         </div>
-      </header>
+      </motion.section>
 
       {/* Streak Card */}
-      <section className="px-6 mb-8">
-        <div className="bg-emerald-brand rounded-[2rem] p-6 text-white shadow-xl shadow-emerald-900/20 relative overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.2 }}
+        className="px-6 mb-8"
+      >
+        <div className="bg-emerald-brand rounded-[2rem] p-6 text-white shadow-xl shadow-emerald-900/20 relative overflow-hidden group">
           <div className="relative z-10">
             <p className="text-emerald-100 text-sm font-medium uppercase tracking-wider mb-1">Current Streak</p>
             <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-serif">{streak}</span>
+              <motion.span 
+                key={streak}
+                initial={{ scale: 1.5, color: '#d4af37' }}
+                animate={{ scale: 1, color: '#ffffff' }}
+                className="text-5xl font-serif"
+              >
+                {streak}
+              </motion.span>
               <span className="text-xl text-emerald-100">days</span>
             </div>
             <p className="mt-4 text-sm text-emerald-50/80">Your skin is thriving! Keep up the consistency for best results.</p>
           </div>
-          <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.2, 0.1]
+            }}
+            transition={{ duration: 8, repeat: Infinity }}
+            className="absolute -right-8 -bottom-8 w-32 h-32 bg-white rounded-full blur-2xl"
+          ></motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Routines */}
       <section className="px-6 space-y-8">
-        {routines.map((routine) => {
+        {routines.map((routine, idx) => {
           const steps = selectedRoutineSteps[routine.id] || [];
           const isCompleted = logs.some(l => l.routine_id === routine.id && l.date === new Date().toISOString().split('T')[0]);
 
           return (
-            <div key={routine.id}>
+            <motion.div 
+              key={routine.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + (idx * 0.1) }}
+            >
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl text-teal-deep font-serif">{routine.name}</h2>
                 <span className={`text-xs font-bold px-2 py-1 rounded-full uppercase tracking-tighter ${
@@ -76,13 +145,14 @@ const Dashboard: React.FC = () => {
                 </span>
               </div>
               <div className={`space-y-3 ${isCompleted ? 'opacity-60' : ''}`}>
-                {steps.map((step) => (
-                  <div 
+                {steps.map((step, stepIdx) => (
+                  <motion.div 
                     key={step.id} 
-                    className="p-4 rounded-2xl border bg-white border-gray-100 shadow-md flex items-center justify-between"
+                    whileHover={{ scale: isCompleted ? 1 : 1.02 }}
+                    className="p-4 rounded-2xl border bg-white border-gray-100 shadow-md flex items-center justify-between transition-shadow hover:shadow-lg"
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
                         isCompleted ? 'bg-emerald-brand border-emerald-brand text-white' : 'border-gray-200'
                       }`}>
                         {isCompleted && (
@@ -93,36 +163,38 @@ const Dashboard: React.FC = () => {
                       </div>
                       <div>
                         <p className={`font-medium ${isCompleted ? 'line-through text-gray-400' : 'text-gray-900'}`}>{step.product_name}</p>
-                        <p className="text-xs text-gray-400">{step.instructions || step.brand}</p>
+                        <p className="text-xs text-gray-400 font-serif italic">{step.instructions || step.brand}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
                 {!isCompleted && steps.length > 0 && (
                   <button 
                     onClick={() => setActiveRoutineForLogging(routine)}
-                    className="w-full py-3 bg-teal-soft text-teal-deep rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-teal-200 transition-colors shadow-sm"
+                    className="w-full py-4 bg-teal-soft text-teal-deep rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-teal-200 transition-all shadow-sm active:scale-[0.98]"
                   >
-                    Start Session
+                    Begin Ritual
                   </button>
                 )}
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </section>
 
       {/* Routine Logger Modal */}
-      {activeRoutineForLogging && (
-        <RoutineLogger 
-          routine={activeRoutineForLogging}
-          steps={selectedRoutineSteps[activeRoutineForLogging.id] || []}
-          onClose={() => setActiveRoutineForLogging(null)}
-          onSave={async (status, notes, photoUrl) => {
-            await addLog(activeRoutineForLogging.id, status, notes, photoUrl);
-          }}
-        />
-      )}
+      <AnimatePresence>
+        {activeRoutineForLogging && (
+          <RoutineLogger 
+            routine={activeRoutineForLogging}
+            steps={selectedRoutineSteps[activeRoutineForLogging.id] || []}
+            onClose={() => setActiveRoutineForLogging(null)}
+            onSave={async (status, notes, photoUrl) => {
+              await addLog(activeRoutineForLogging.id, status, notes, photoUrl);
+            }}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
