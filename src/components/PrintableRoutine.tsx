@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useGlowTrack } from '../hooks/useGlowTrack';
+import { useCasaDeMarjie } from '../hooks/useCasaDeMarjie';
 import { Routine, RoutineStep } from '../services/api';
 
 const PrintableRoutine: React.FC = () => {
   const userId = 'test-user-1';
-  const { routines, loading, error, getRoutineWithSteps } = useGlowTrack(userId);
+  const { routines, loading, error, getRoutineWithSteps } = useCasaDeMarjie(userId);
   const [selectedRoutineSteps, setSelectedRoutineSteps] = useState<Record<string, RoutineStep[]>>({});
 
   useEffect(() => {

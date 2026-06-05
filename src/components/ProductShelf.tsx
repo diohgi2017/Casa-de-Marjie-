@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useGlowTrack } from '../hooks/useGlowTrack';
+import { useCasaDeMarjie } from '../hooks/useCasaDeMarjie';
 import { Product } from '../services/api';
 
 const categories = ['All', 'Cleanser', 'Toner', 'Serum', 'Moisturizer', 'SPF', 'Treatment'];
@@ -10,7 +10,7 @@ interface ProductUI extends Product {
 
 const ProductShelf: React.FC = () => {
   const userId = 'test-user-1';
-  const { products, loading, error, addProduct } = useGlowTrack(userId);
+  const { products, loading, error, addProduct } = useCasaDeMarjie(userId);
   const [filter, setFilter] = useState('All');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductUI | null>(null);

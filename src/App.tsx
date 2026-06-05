@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Dashboard from './components/Dashboard';
 import ProductShelf from './components/ProductShelf';
 import PrintableRoutine from './components/PrintableRoutine';
-import GlowUpGallery from './components/GlowUpGallery';
+import RitualGallery from './components/RitualGallery';
 import AIRecommendations from './components/AIRecommendations';
 
 const App: React.FC = () => {
@@ -14,7 +14,7 @@ const App: React.FC = () => {
         {activeTab === 'dashboard' && <Dashboard />}
         {activeTab === 'shelf' && <ProductShelf />}
         {activeTab === 'ritual' && <PrintableRoutine />}
-        {activeTab === 'gallery' && <GlowUpGallery />}
+        {activeTab === 'gallery' && <RitualGallery />}
         {activeTab === 'ai' && <AIRecommendations />}
       </main>
       

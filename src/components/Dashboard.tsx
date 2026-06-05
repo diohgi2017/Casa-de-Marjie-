@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useGlowTrack } from '../hooks/useGlowTrack';
+import { useCasaDeMarjie } from '../hooks/useCasaDeMarjie';
 import type { Routine, RoutineStep } from '../services/api';
 import RoutineLogger from './RoutineLogger';
 
 const Dashboard: React.FC = () => {
   const userId = 'test-user-1'; // As mentioned by the engineer
-  const { routines, logs, loading, error, addLog, getRoutineWithSteps, calculateStreak } = useGlowTrack(userId);
+  const { routines, logs, loading, error, addLog, getRoutineWithSteps, calculateStreak } = useCasaDeMarjie(userId);
   const [selectedRoutineSteps, setSelectedRoutineSteps] = useState<Record<string, RoutineStep[]>>({});
   const [activeRoutineForLogging, setActiveRoutineForLogging] = useState<Routine | null>(null);
 
@@ -53,7 +53,7 @@ const Dashboard: React.FC = () => {
               <span className="text-5xl font-serif">{streak}</span>
               <span className="text-xl text-emerald-100">days</span>
             </div>
-            <p className="mt-4 text-sm text-emerald-50/80">You're glowing! Keep up the consistency for best results.</p>
+            <p className="mt-4 text-sm text-emerald-50/80">Your skin is thriving! Keep up the consistency for best results.</p>
           </div>
           <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
         </div>

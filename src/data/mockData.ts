@@ -17,7 +17,7 @@ export const mockProducts: Product[] = [
     ingredients: 'Squalane, Aqua, etc.',
     expiry_date: '2026-12-31',
     created_at: '2026-06-04T06:13:15Z',
-    affiliate_url: 'https://www.amazon.com/dp/B007QD0S6E?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B007QD0S6E?tag=casademarjie-20',
   },
   {
     id: 'prod-2',
@@ -28,7 +28,7 @@ export const mockProducts: Product[] = [
     ingredients: 'Salicylic Acid',
     expiry_date: '2025-06-30',
     created_at: '2026-06-04T06:13:15Z',
-    affiliate_url: 'https://www.amazon.com/dp/B00949CTQQ?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B00949CTQQ?tag=casademarjie-20',
   },
   {
     id: 'prod-3',
@@ -39,7 +39,7 @@ export const mockProducts: Product[] = [
     ingredients: 'Ceramides, Hyaluronic Acid',
     expiry_date: '2027-01-01',
     created_at: '2026-06-04T06:13:15Z',
-    affiliate_url: 'https://www.amazon.com/dp/B00TR7S90E?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B00TR7S90E?tag=casademarjie-20',
   },
   {
     id: 'prod-4',
@@ -51,7 +51,7 @@ export const mockProducts: Product[] = [
     expiry_date: '2026-05-30',
     created_at: '2026-06-04T18:06:53Z',
     image_url: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=400',
-    affiliate_url: 'https://www.amazon.com/dp/B00D7BZ66A?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B00D7BZ66A?tag=casademarjie-20',
   },
   {
     id: 'prod-5',
@@ -63,7 +63,7 @@ export const mockProducts: Product[] = [
     expiry_date: '2025-10-15',
     created_at: '2026-06-04T18:06:53Z',
     image_url: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=400',
-    affiliate_url: 'https://www.amazon.com/dp/B00V4JROA2?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B00V4JROA2?tag=casademarjie-20',
   },
   {
     id: 'prod-6',
@@ -75,7 +75,7 @@ export const mockProducts: Product[] = [
     expiry_date: '2026-12-31',
     created_at: '2026-06-04T18:07:23Z',
     image_url: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=400',
-    affiliate_url: 'https://www.amazon.com/dp/B01HXTAYV6?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B01HXTAYV6?tag=casademarjie-20',
   },
   {
     id: 'prod-7',
@@ -86,7 +86,7 @@ export const mockProducts: Product[] = [
     ingredients: '2% Salicylic Acid',
     expiry_date: '2027-12-31',
     created_at: '2026-06-04T20:30:00Z',
-    affiliate_url: 'https://www.amazon.com/dp/B0B6Y5QXYZ?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B0B6Y5QXYZ?tag=casademarjie-20',
   },
   {
     id: 'prod-8',
@@ -97,7 +97,7 @@ export const mockProducts: Product[] = [
     ingredients: 'Ceramides, Hyaluronic Acid',
     expiry_date: '2027-12-31',
     created_at: '2026-06-04T20:30:00Z',
-    affiliate_url: 'https://www.amazon.com/dp/B0BQ7MNPQ?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B0BQ7MNPQ?tag=casademarjie-20',
   },
   {
     id: 'prod-9',
@@ -108,7 +108,7 @@ export const mockProducts: Product[] = [
     ingredients: 'Granactive Retinoid',
     expiry_date: '2027-12-31',
     created_at: '2026-06-04T20:30:00Z',
-    affiliate_url: 'https://www.amazon.com/dp/B0CDMHGZ8?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B0CDMHGZ8?tag=casademarjie-20',
   },
   {
     id: 'prod-10',
@@ -119,7 +119,7 @@ export const mockProducts: Product[] = [
     ingredients: 'Micellar Technology',
     expiry_date: '2027-12-31',
     created_at: '2026-06-04T20:30:00Z',
-    affiliate_url: 'https://www.amazon.com/dp/B0BZTYNZC?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B0BZTYNZC?tag=casademarjie-20',
   },
   {
     id: 'prod-11',
@@ -130,7 +130,7 @@ export const mockProducts: Product[] = [
     ingredients: 'Salicylic Acid, Charcoal, Clays',
     expiry_date: '2027-12-31',
     created_at: '2026-06-04T20:30:00Z',
-    affiliate_url: 'https://www.amazon.com/dp/B0CKJ8D7Q?tag=glowtrack-20',
+    affiliate_url: 'https://www.amazon.com/dp/B0CKJ8D7Q?tag=casademarjie-20',
   },
 ];
 
@@ -238,7 +238,7 @@ export const mockLogs: Log[] = [
     routine_id: 'rout-am',
     date: '2026-06-01',
     completion_status: 'completed',
-    notes: 'One month in! The glow is real.',
+    notes: 'One month in! The change is real.',
     photo_url: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&q=80&w=800',
     created_at: '2026-06-04T17:09:02Z',
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGlowTrack } from '../hooks/useGlowTrack';
+import { useCasaDeMarjie } from '../hooks/useCasaDeMarjie';
 import { Product } from '../services/api';
 import { affiliateLinks } from '../data/affiliateLinks';
 
@@ -17,7 +17,7 @@ interface RecommendedProduct extends Partial<Product> {
 
 const AIRecommendations: React.FC = () => {
   const userId = 'test-user-1';
-  const { products, logs, loading, error } = useGlowTrack(userId);
+  const { products, logs, loading, error } = useCasaDeMarjie(userId);
 
   const handlePurchase = (rec: RecommendedProduct) => {
     // Try the product's affiliate_url first, then fall back to name-based lookup

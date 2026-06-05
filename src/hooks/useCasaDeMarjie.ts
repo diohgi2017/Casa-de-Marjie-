@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { apiService, Product, Routine, Log, RoutineStep } from '../services/api';
 
-export const useGlowTrack = (userId: string) => {
+export const useCasaDeMarjie = (userId: string) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [routines, setRoutines] = useState<Routine[]>([]);
   const [logs, setLogs] = useState<Log[]>([]);

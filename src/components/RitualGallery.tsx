@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { useGlowTrack } from '../hooks/useGlowTrack';
+import { useCasaDeMarjie } from '../hooks/useCasaDeMarjie';
 import { Log } from '../services/api';
 
-const GlowUpGallery: React.FC = () => {
+const RitualGallery: React.FC = () => {
   const userId = 'test-user-1';
-  const { logs, loading, error, addLog } = useGlowTrack(userId);
+  const { logs, loading, error, addLog } = useCasaDeMarjie(userId);
   const [isUploadModalOpen, setIsModalOpen] = useState(false);
   const [selectedPhoto1, setSelectedPhoto1] = useState<string | null>(null);
   const [selectedPhoto2, setSelectedPhoto2] = useState<string | null>(null);
@@ -51,7 +51,7 @@ const GlowUpGallery: React.FC = () => {
       {/* Header */}
       <header className="p-6 pt-12 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl text-emerald-brand font-serif font-bold">Glow Up Gallery</h1>
+          <h1 className="text-3xl text-emerald-brand font-serif font-bold">Ritual Gallery</h1>
           <p className="text-sm text-gray-500 font-sans">Visualize your progress</p>
         </div>
         <button 
@@ -186,7 +186,7 @@ const GlowUpGallery: React.FC = () => {
           </div>
           
           <div className="p-12 text-center text-white/60 text-sm italic font-serif">
-            Slide to reveal the glow
+            Slide to reveal the change
           </div>
         </div>
       )}
@@ -196,7 +196,7 @@ const GlowUpGallery: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
           <div className="absolute inset-0 bg-teal-deep/60 backdrop-blur-md" onClick={() => setIsModalOpen(false)}></div>
           <div className="relative w-full max-w-sm bg-white rounded-[2.5rem] p-8 shadow-2xl overflow-hidden">
-            <h2 className="text-2xl text-emerald-brand font-serif font-bold mb-6">Log Your Glow</h2>
+            <h2 className="text-2xl text-emerald-brand font-serif font-bold mb-6">Log Your Ritual</h2>
             <form onSubmit={handleUpload} className="space-y-4">
               <div className="w-full aspect-square bg-off-white rounded-2xl flex flex-col items-center justify-center border-2 border-dashed border-gray-200 text-gray-400 overflow-hidden mb-4">
                 {newPhoto.photoUrl ? (
@@ -239,7 +239,7 @@ const GlowUpGallery: React.FC = () => {
                   type="submit"
                   className="flex-2 px-8 py-3 bg-emerald-brand text-white rounded-xl font-bold uppercase tracking-widest text-[10px]"
                 >
-                  Save Log
+                  Save Entry
                 </button>
               </div>
             </form>
@@ -250,4 +250,4 @@ const GlowUpGallery: React.FC = () => {
   );
 };
 
-export default GlowUpGallery;
+export default RitualGallery;
